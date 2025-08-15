@@ -1,12 +1,13 @@
 "use client";
 
+import { User } from "@/generated/prisma";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function UsersPage() {
 
-    const [users, setUsers] = useState<any[]>([]);
-    const [editigUser, setEditingUser] = useState<any | null>(null);
+    const [users, setUsers] = useState<User[]>([]);
+    const [editigUser, setEditingUser] = useState<User | null>(null);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
 
@@ -17,7 +18,7 @@ export default function UsersPage() {
         setUsers(data);
     }
 
-    async function startEdit(user: any) {
+    async function startEdit(user: User) {
         setEditingUser(user);
         setName(user.name);
         setEmail(user.email);
@@ -28,7 +29,7 @@ export default function UsersPage() {
         await fetch('/api/users', {
             method: 'PUT',
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: editigUser.id, name, email })
+            body: JSON.stringify({ id: editigUser?.id, name, email })
         });
 
         setEditingUser(null);
@@ -39,7 +40,7 @@ export default function UsersPage() {
     }
 
     async function deleteUser(id: number) {
-        const res = await fetch('/api/users', {
+        await fetch('/api/users', {
             method: 'DELETE',
             headers: { "COntent-Type": "application/json" },
             body: JSON.stringify({ id })
@@ -56,7 +57,7 @@ export default function UsersPage() {
         <main>
             <h1>Lista de usuarios</h1>
             <ul>
-                {users.map((user: any) => (
+                {users.map((user: User) => (
                     <li key={user.id}>
                         <Link href={`/users/${user.id}`}>
                             <strong>{user.name}</strong> — {user.email}
