@@ -1,9 +1,10 @@
 import Link from "next/link";
 
 export default function HomePage() {
+  const appName = process.env.NEXT_PUBLIC_SECRET_WORD;
   return (
     <main>
-      <h1>Hola mundo con Next.js</h1>
+      <h1>Hola mundo {appName}</h1>
       <p>Esta es mi primera página usando React + Next.js</p>
       
       <nav>
