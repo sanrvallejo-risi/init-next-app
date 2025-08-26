@@ -38,6 +38,7 @@ COPY --from=build /app/.next ./.next
 COPY --from=build /app/public ./public
 COPY --from=build /app/src/generated ./src/generated
 COPY --from=build /app/next.config.* ./
+COPY --from=build /app/prisma ./prisma
 
 EXPOSE 3000
 CMD ["npm", "start"]
