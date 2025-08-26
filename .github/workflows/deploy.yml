@@ -51,7 +51,7 @@ jobs:
         id: render-task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: aws/taskdef.json
+          task-definition: aws/task-def.json
           container-name: cicd
           image: ${{ steps.build-image.outputs.image }}
 
