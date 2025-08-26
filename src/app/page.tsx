@@ -12,6 +12,7 @@ export default function HomePage() {
         <Link href="/users">Ver Usuarios</Link> |{" "}
         <Link href="/add-user">Agregar usuario</Link>
       </nav>
+      <h1>Adios mundo {appName}</h1>
     </main>
   )
 }
