@@ -22,7 +22,7 @@ jobs:
         run: |
           set -e
           echo "Requesting OIDC token from GitHub..."
-          TOKEN=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=sts.amazonaws.com" \
+          RAW=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=sts.amazonaws.com" \
             -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}")
           TOKEN=$(echo $RAW | jq -r '.value')
           echo "Decoded OIDC token payload:"
