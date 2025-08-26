@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: psql
+      POSTGRES_PASSWORD: '052311'
+      POSTGRES_DB: next
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "postgresql://psql:052311@db:5432/next?schema=public"
+    ports:
+      - "3000:3000"
