@@ -1,0 +1,103 @@
+{
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "containerDefinitions": [
+        {
+            "cpu": 0,
+            "environment": [],
+            "environmentFiles": [],
+            "essential": true,
+            "image": "914194816312.dkr.ecr.us-east-2.amazonaws.com/next-cicd:latest",
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/next-cicd",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "us-east-2",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "mountPoints": [],
+            "name": "cicd",
+            "portMappings": [
+                {
+                    "appProtocol": "http",
+                    "containerPort": 3000,
+                    "hostPort": 3000,
+                    "name": "cicd-3000-tcp",
+                    "protocol": "tcp"
+                }
+            ],
+            "secrets": [
+                {
+                    "name": "DATABASE_URL",
+                    "valueFrom": "arn:aws:ssm:us-east-2:914194816312:parameter/next/db/cicd"
+                },
+                {
+                    "name": "NEXT_PUBLIC_SECRET_WORD",
+                    "valueFrom": "arn:aws:ssm:us-east-2:914194816312:parameter/next/db/secret"
+                }
+            ],
+            "systemControls": [],
+            "ulimits": [],
+            "volumesFrom": []
+        }
+    ],
+    "cpu": "256",
+    "enableFaultInjection": false,
+    "executionRoleArn": "arn:aws:iam::914194816312:role/ecsTaskExecutionRole",
+    "family": "next-cicd",
+    "memory": "512",
+    "networkMode": "awsvpc",
+    "placementConstraints": [],
+    "registeredAt": "2025-08-26T13:57:53.873Z",
+    "registeredBy": "arn:aws:sts::914194816312:assumed-role/AWSReservedSSO_AdministratorAccess_a6bce7b667affd2b/santiago-risi",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "ecs.capability.secrets.ssm.environment-variables"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "revision": 1,
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "status": "ACTIVE",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:914194816312:task-definition/next-cicd:1",
+    "taskRoleArn": "arn:aws:iam::914194816312:role/ecsTaskExecutionRole",
+    "volumes": [],
+    "tags": []
+}
